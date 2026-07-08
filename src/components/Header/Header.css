@@ -1,14 +1,22 @@
 .header-nav {
-  padding: 0px;
+  padding: 0;
 }
 
 .site-header {
+  position: absolute;
+  top: 40px;
+  right: 24px;
+  left: auto;
+  transform: none;
+  z-index: 10;
+}
+
+.site-header .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
-  max-width: 1200px;
-  margin: 20px auto;
+  width: fit-content;
   padding: 16px 32px;
 
   background: #ffffff;
