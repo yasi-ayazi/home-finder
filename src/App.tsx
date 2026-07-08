@@ -1,15 +1,13 @@
 import './App.css'
 import Header from './components/Header/Header'
+import Hero from "./components/Hero/Hero";
+
 function App() {
 
   return (
     <>
+      <Hero />
       <Header />
-      <section id="center">
-        <div>
-          <h1>Home Finder</h1>
-        </div>
-      </section>
 
     </>
   )
