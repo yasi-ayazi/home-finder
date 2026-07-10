@@ -5,10 +5,16 @@ import SearchBox from "../SearchBox/SearchBox";
 
 function SearchPanel() {
     const [activeTab, setActiveTab] = useState("buy");
+    const [query, setQuery] = useState("");
+
     return (
         <div className="search-panel">
             <SearchTabs activeTab={activeTab} onTabChange={setActiveTab} />
-            <SearchBox activeTab={activeTab} />
+            <SearchBox
+                activeTab={activeTab}
+                query={query}
+                onQueryChange={setQuery}
+            />
 
         </div>
     );
