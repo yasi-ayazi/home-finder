@@ -6,6 +6,10 @@ import SearchBox from "../SearchBox/SearchBox";
 function SearchPanel() {
     const [activeTab, setActiveTab] = useState("buy");
     const [query, setQuery] = useState("");
+    const handleSearch = () => {
+        console.log("Active Tab:", activeTab);
+        console.log("Query:", query);
+    };
 
     return (
         <div className="search-panel">
@@ -14,6 +18,7 @@ function SearchPanel() {
                 activeTab={activeTab}
                 query={query}
                 onQueryChange={setQuery}
+                onSearch={handleSearch}
             />
 
         </div>
