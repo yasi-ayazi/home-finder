@@ -7,8 +7,14 @@ function SearchPanel() {
     const [activeTab, setActiveTab] = useState("buy");
     const [query, setQuery] = useState("");
     const handleSearch = () => {
+        const trimmedQuery = query.trim();
+
+        if (trimmedQuery === "") {
+            return;
+        }
+
         console.log("Active Tab:", activeTab);
-        console.log("Query:", query);
+        console.log("Query:", trimmedQuery);
     };
 
     return (
