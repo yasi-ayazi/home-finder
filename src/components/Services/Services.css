@@ -1,0 +1,28 @@
+.services {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 96px 24px;
+    text-align: center;
+}
+
+.services__title {
+    margin-bottom: 12px;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--text-h);
+}
+
+.services__description {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.services__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 48px;
+}
