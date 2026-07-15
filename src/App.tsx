@@ -2,6 +2,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import Hero from "./components/Hero/Hero";
 import Services from './components/Services/Services';
+import FeaturedProperties from './components/FeaturedProperties/FeaturedProperties';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <Hero />
       <Header />
       <Services />
+      <FeaturedProperties />
 
     </>
   )

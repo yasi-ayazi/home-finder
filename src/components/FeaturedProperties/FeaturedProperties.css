@@ -1,0 +1,29 @@
+.featured-properties {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px 96px;
+}
+
+.featured-properties__title {
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+.featured-properties__description {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.featured-properties__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+}
