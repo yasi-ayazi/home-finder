@@ -1,3 +1,4 @@
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import "./Footer.css";
 
 function Footer() {
@@ -14,9 +15,19 @@ function Footer() {
                     <p className="footer__text">
                         Find your next home across Denmark.
                     </p>
-                    <div className="footer__social">
 
+                    <div className="footer__social">
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                            <FaFacebookF />
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                            <FaInstagram />
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <FaLinkedinIn />
+                        </a>
                     </div>
+
                 </div>
 
                 <div className="footer__links">
