@@ -1,18 +1,21 @@
 import './App.css'
 import Header from './components/Header/Header'
-import Hero from "./components/Hero/Hero";
-import Services from './components/Services/Services';
-import FeaturedProperties from './components/FeaturedProperties/FeaturedProperties';
 import Footer from './components/Footer/Footer';
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Buy from './pages/Buy';
 
 function App() {
 
   return (
     <>
-      <Hero />
       <Header />
-      <Services />
-      <FeaturedProperties />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/buy" element={<Buy />} />
+      </Routes>
+
       <Footer />
     </>
   )
