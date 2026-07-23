@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Buy.css";
 import SearchBox from "../components/SearchBox/SearchBox";
 import PropertyCard from "../components/PropertyCard/PropertyCard";
 import { properties } from "../data/properties";
@@ -21,23 +22,36 @@ function Buy() {
 
   return (
     <main className="buy-page">
-      <h1 className="buy-page__title">Properties for Sale</h1>
 
-      <section className="buy-page__search">
-        <SearchBox
-          activeTab="buy"
-          query={query}
-          onQueryChange={setQuery}
-          onSearch={handleSearch}
-        />
+      <section className="buy-page__header">
+        <h1 className="buy-page__title">
+          Properties for Sale
+        </h1>
+
+        <div className="buy-page__search">
+          <SearchBox
+            activeTab="buy"
+            query={query}
+            onQueryChange={setQuery}
+            onSearch={handleSearch}
+          />
+        </div>
       </section>
 
       <section className="buy-page__controls">
-        {/* Filters */}
-        <button type="button">Filters</button>
+        <button
+          type="button"
+          className="buy-page__control-button"
+        >
+          Filters
+        </button>
 
-        {/* Sort */}
-        <button type="button">Sort</button>
+        <button
+          type="button"
+          className="buy-page__control-button"
+        >
+          Sort
+        </button>
       </section>
 
       <section className="buy-page__active-filters">
@@ -71,6 +85,7 @@ function Buy() {
       <section className="buy-page__pagination">
         {/* Load More / Pagination */}
       </section>
+
     </main>
   );
 }
