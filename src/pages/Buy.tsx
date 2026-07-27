@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Buy.css";
 import SearchBox from "../components/SearchBox/SearchBox";
-import PropertyCard from "../components/PropertyCard/PropertyCard";
+import PropertyList from "../components/PropertyList/PropertyList";
+import PropertyMap from "../components/PropertyMap/PropertyMap";
 import { properties } from "../data/properties";
 
 function Buy() {
@@ -59,34 +60,19 @@ function Buy() {
       </section>
 
       <section className="buy-page__content">
-        <section className="buy-page__properties">
-          {filteredProperties.map((property) => (
-            <PropertyCard
-              key={property.id}
-              id={property.id}
-              image={property.image}
-              price={property.price}
-              address={property.address}
-              city={property.city}
-              type={property.type}
-              bedrooms={property.bedrooms}
-              bathrooms={property.bathrooms}
-              area={property.area}
-              badges={property.badges}
-            />
-          ))}
-        </section>
-
-        <aside className="buy-page__map">
-          {/* Map will be added later */}
-        </aside>
+        <PropertyList properties={filteredProperties} />
+        <PropertyMap />
       </section>
 
       <section className="buy-page__pagination">
         {/* Load More / Pagination */}
       </section>
 
-    </main>
+      <section className="buy-page__pagination">
+        {/* Load More / Pagination */}
+      </section>
+
+    </main >
   );
 }
 
