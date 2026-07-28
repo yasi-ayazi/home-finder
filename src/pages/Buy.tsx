@@ -3,6 +3,8 @@ import "./Buy.css";
 import SearchBox from "../components/SearchBox/SearchBox";
 import PropertyList from "../components/PropertyList/PropertyList";
 import PropertyMap from "../components/PropertyMap/PropertyMap";
+import PropertyFilters from "../components/PropertyFilters/PropertyFilters";
+import PropertySort from "../components/PropertySort/PropertySort";
 import { properties } from "../data/properties";
 
 function Buy() {
@@ -40,19 +42,8 @@ function Buy() {
       </section>
 
       <section className="buy-page__controls">
-        <button
-          type="button"
-          className="buy-page__control-button"
-        >
-          Filters
-        </button>
-
-        <button
-          type="button"
-          className="buy-page__control-button"
-        >
-          Sort
-        </button>
+        <PropertyFilters />
+        <PropertySort />
       </section>
 
       <section className="buy-page__active-filters">
