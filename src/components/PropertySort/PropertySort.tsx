@@ -2,12 +2,11 @@ import "./PropertySort.css";
 
 function PropertySort() {
   return (
-    <button
-      type="button"
-      className="buy-page__control-button"
-    >
-      Sort
-    </button>
+    <select className="property-sort">
+      <option>Newest</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+    </select>
   );
 }
 
