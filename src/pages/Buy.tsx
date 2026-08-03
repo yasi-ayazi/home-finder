@@ -10,10 +10,8 @@ import { properties } from "../data/properties";
 function Buy() {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
-  console.log(sortBy);
 
   function handleSearch() {
-    console.log(query);
   }
 
   // Filter properties by city + address + type
@@ -24,6 +22,20 @@ function Buy() {
     property.address.toLowerCase().includes(q) ||
     property.type.toLowerCase().includes(q)
   );
+  const sortedProperties = [...filteredProperties]
+  if (sortBy === "price-low") {
+  sortedProperties.sort((a, b) =>
+    Number(a.price.replace(/[^\d]/g, "")) -
+    Number(b.price.replace(/[^\d]/g, ""))
+  );
+}
+
+if (sortBy === "price-high") {
+  sortedProperties.sort((a, b) =>
+    Number(b.price.replace(/[^\d]/g, "")) -
+    Number(a.price.replace(/[^\d]/g, ""))
+  );
+}
 
   return (
     <main className="buy-page">
@@ -56,7 +68,7 @@ function Buy() {
       </section>
 
       <section className="buy-page__content">
-        <PropertyList properties={filteredProperties} />
+        <PropertyList properties={sortedProperties} />
         <PropertyMap />
       </section>
 
@@ -64,9 +76,6 @@ function Buy() {
         {/* Load More / Pagination */}
       </section>
 
-      <section className="buy-page__pagination">
-        {/* Load More / Pagination */}
-      </section>
 
     </main >
   );
