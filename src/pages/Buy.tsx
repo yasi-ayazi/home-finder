@@ -9,6 +9,8 @@ import { properties } from "../data/properties";
 
 function Buy() {
   const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState("newest");
+  console.log(sortBy);
 
   function handleSearch() {
     console.log(query);
@@ -43,7 +45,10 @@ function Buy() {
 
       <section className="buy-page__controls">
         <PropertyFilters />
-        <PropertySort />
+        <PropertySort
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+        />
       </section>
 
       <section className="buy-page__active-filters">
