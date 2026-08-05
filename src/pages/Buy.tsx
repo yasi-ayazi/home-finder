@@ -10,7 +10,7 @@ import { properties } from "../data/properties";
 function Buy() {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
-
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   function handleSearch() {
   }
 
@@ -22,6 +22,7 @@ function Buy() {
     property.address.toLowerCase().includes(q) ||
     property.type.toLowerCase().includes(q)
   );
+  // Sortting
   const sortedProperties = [...filteredProperties]
   if (sortBy === "newest") {
     sortedProperties.sort((a, b) => b.id - a.id);
@@ -59,7 +60,10 @@ function Buy() {
       </section>
 
       <section className="buy-page__controls">
-        <PropertyFilters />
+        <PropertyFilters
+          isOpen={isFiltersOpen}
+          onToggle={() => setIsFiltersOpen(!isFiltersOpen)}
+        />
         <PropertySort
           sortBy={sortBy}
           onSortChange={setSortBy}

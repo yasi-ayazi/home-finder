@@ -1,12 +1,21 @@
 import "./PropertyFilters.css";
 
-function PropertyFilters() {
+type PropertyFiltersProps = {
+  isOpen: boolean;
+  onToggle: () => void;
+};
+
+function PropertyFilters({
+  isOpen,
+  onToggle,
+}: PropertyFiltersProps) {
   return (
     <button
       type="button"
-      className="buy-page__control-button"
+      className="property-filters"
+      onClick={onToggle}
     >
-      Filters
+      Filters {isOpen ? "▲" : "▼"}
     </button>
   );
 }
