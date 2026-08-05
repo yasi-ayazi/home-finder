@@ -23,19 +23,22 @@ function Buy() {
     property.type.toLowerCase().includes(q)
   );
   const sortedProperties = [...filteredProperties]
+  if (sortBy === "newest") {
+    sortedProperties.sort((a, b) => b.id - a.id);
+  }
   if (sortBy === "price-low") {
-  sortedProperties.sort((a, b) =>
-    Number(a.price.replace(/[^\d]/g, "")) -
-    Number(b.price.replace(/[^\d]/g, ""))
-  );
-}
+    sortedProperties.sort((a, b) =>
+      Number(a.price.replace(/[^\d]/g, "")) -
+      Number(b.price.replace(/[^\d]/g, ""))
+    );
+  }
 
-if (sortBy === "price-high") {
-  sortedProperties.sort((a, b) =>
-    Number(b.price.replace(/[^\d]/g, "")) -
-    Number(a.price.replace(/[^\d]/g, ""))
-  );
-}
+  if (sortBy === "price-high") {
+    sortedProperties.sort((a, b) =>
+      Number(b.price.replace(/[^\d]/g, "")) -
+      Number(a.price.replace(/[^\d]/g, ""))
+    );
+  }
 
   return (
     <main className="buy-page">
