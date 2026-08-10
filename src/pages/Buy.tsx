@@ -11,6 +11,8 @@ function Buy() {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+
   function handleSearch() {
   }
 
@@ -63,6 +65,8 @@ function Buy() {
         <PropertyFilters
           isOpen={isFiltersOpen}
           onToggle={() => setIsFiltersOpen(!isFiltersOpen)}
+          selectedTypes={selectedTypes}
+          onTypesChange={setSelectedTypes}
         />
         <PropertySort
           sortBy={sortBy}
