@@ -5,6 +5,10 @@ type PropertyFiltersProps = {
   onToggle: () => void;
   selectedTypes: string[];
   onTypesChange: (types: string[]) => void;
+  minPrice: string;
+  maxPrice: string;
+  onMinPriceChange: (value: string) => void;
+  onMaxPriceChange: (value: string) => void;
 };
 
 function PropertyFilters({
@@ -12,6 +16,10 @@ function PropertyFilters({
   onToggle,
   selectedTypes,
   onTypesChange,
+  minPrice,
+  maxPrice,
+  onMinPriceChange,
+  onMaxPriceChange
 }: PropertyFiltersProps) {
 
   function handleTypeChange(
@@ -68,6 +76,24 @@ function PropertyFilters({
               onChange={handleTypeChange}
             />
             Townhouse
+          </label>
+          <label>
+            Min Price
+            <input
+              type="number"
+              placeholder="Min"
+              value={minPrice}
+              onChange={(e) => onMinPriceChange(e.target.value)}
+            />
+          </label>
+          <label>
+            Max Price
+            <input
+              type="number"
+              placeholder="Max"
+              value={maxPrice}
+              onChange={(e) => onMaxPriceChange(e.target.value)}
+            />
           </label>
         </div>
       )}

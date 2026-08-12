@@ -12,6 +12,8 @@ function Buy() {
   const [sortBy, setSortBy] = useState("newest");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   function handleSearch() {
   }
@@ -19,11 +21,26 @@ function Buy() {
   // Filter properties by city + address + type
   const q = query.trim().toLowerCase(); // q is a part of the query for example city like "cope"
 
-  const filteredProperties = properties.filter((property) =>
-    property.city.toLowerCase().includes(q) ||
-    property.address.toLowerCase().includes(q) ||
-    property.type.toLowerCase().includes(q)
-  );
+  const filteredProperties = properties.filter((property) => {
+    const matchesSearch =
+      property.city.toLowerCase().includes(q) ||
+      property.address.toLowerCase().includes(q) ||
+      property.type.toLowerCase().includes(q);
+
+    const matchesType =
+      selectedTypes.length === 0 ||
+      selectedTypes.includes(property.type);
+
+    const propertyPrice = Number(
+      property.price.replace(/[^\d]/g, "")
+    );
+
+    const matchesPrice =
+      (minPrice === "" || propertyPrice >= Number(minPrice)) &&
+      (maxPrice === "" || propertyPrice <= Number(maxPrice));
+
+    return matchesSearch && matchesType && matchesPrice;
+  });
   // Sortting
   const sortedProperties = [...filteredProperties]
   if (sortBy === "newest") {
@@ -67,6 +84,10 @@ function Buy() {
           onToggle={() => setIsFiltersOpen(!isFiltersOpen)}
           selectedTypes={selectedTypes}
           onTypesChange={setSelectedTypes}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinPriceChange={setMinPrice}
+          onMaxPriceChange={setMaxPrice}
         />
         <PropertySort
           sortBy={sortBy}
