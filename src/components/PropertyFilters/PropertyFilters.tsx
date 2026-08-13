@@ -43,58 +43,68 @@ function PropertyFilters({
         className="property-filters"
         onClick={onToggle}
       >
-        Filters {isOpen ? "▲" : "▼"}
+        <span>Filters</span>
+        <span className="property-filters__arrow">
+          {isOpen ? "▲" : "▼"}
+        </span>
       </button>
 
       {isOpen && (
         <div className="property-filters__panel">
-          <label>
-            <input
-              type="checkbox"
-              value="Villa"
-              checked={selectedTypes.includes("Villa")}
-              onChange={handleTypeChange}
-            />
-            Villa
-          </label>
+          <div className="property-filters__group">
+            <h3 className="property-filters__title">Property Type</h3>
+            <label>
+              <input
+                type="checkbox"
+                value="Villa"
+                checked={selectedTypes.includes("Villa")}
+                onChange={handleTypeChange}
+              />
+              Villa
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Apartment"
+                checked={selectedTypes.includes("Apartment")}
+                onChange={handleTypeChange}
+              />
+              Apartment
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="Townhouse"
+                checked={selectedTypes.includes("Townhouse")}
+                onChange={handleTypeChange}
+              />
+              Townhouse
+            </label>
+          </div>
 
-          <label>
-            <input
-              type="checkbox"
-              value="Apartment"
-              checked={selectedTypes.includes("Apartment")}
-              onChange={handleTypeChange}
-            />
-            Apartment
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              value="Townhouse"
-              checked={selectedTypes.includes("Townhouse")}
-              onChange={handleTypeChange}
-            />
-            Townhouse
-          </label>
-          <label>
-            Min Price
-            <input
-              type="number"
-              placeholder="Min"
-              value={minPrice}
-              onChange={(e) => onMinPriceChange(e.target.value)}
-            />
-          </label>
-          <label>
-            Max Price
-            <input
-              type="number"
-              placeholder="Max"
-              value={maxPrice}
-              onChange={(e) => onMaxPriceChange(e.target.value)}
-            />
-          </label>
+          <div className="property-filters__group">
+            <h3 className="property-filters__title">Price Range</h3>
+            <div className="property-filters__price-inputs">
+              <label>
+                Min Price
+                <input
+                  type="number"
+                  placeholder="Min"
+                  value={minPrice}
+                  onChange={(e) => onMinPriceChange(e.target.value)}
+                />
+              </label>
+              <label>
+                Max Price
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={maxPrice}
+                  onChange={(e) => onMaxPriceChange(e.target.value)}
+                />
+              </label>
+            </div>
+          </div>
         </div>
       )}
 
