@@ -10,15 +10,18 @@ function PropertySort({
   onSortChange,
 }: PropertySortProps) {
   return (
-    <select
-      className="property-sort"
-      value={sortBy}
-      onChange={(event) => onSortChange(event.target.value)}
-    >
-      <option value="newest">Newest</option>
-      <option value="price-low">Price: Low to High</option>
-      <option value="price-high">Price: High to Low</option>
-    </select>
+    <div className="property-sort-wrapper">
+      <select
+        className="property-sort"
+        value={sortBy}
+        onChange={(event) => onSortChange(event.target.value)}
+      >
+        <option value="newest">Newest</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+      </select>
+      <span className="property-sort__arrow">▼</span>
+    </div>
   );
 }
 

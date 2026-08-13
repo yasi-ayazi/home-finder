@@ -1,8 +1,29 @@
+.property-sort-wrapper {
+    position: relative;
+    width: 160px;
+}
+
 .property-sort {
-    padding: 10px 40px 10px 14px;
+    width: 100%;
+    height: 48px;
+    padding: 0 40px 0 20px;
+
     border: 1px solid #d8dce5;
     border-radius: 8px;
     background: white;
     font: inherit;
     cursor: pointer;
+
+    appearance: none;
+}
+
+.property-sort__arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 400;
+
+    pointer-events: none;
 }
