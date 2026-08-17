@@ -11,6 +11,8 @@ type PropertyFiltersProps = {
   onMaxPriceChange: (value: string) => void;
 };
 
+const MAX_PRICE = 5000000;
+
 function PropertyFilters({
   isOpen,
   onToggle,
@@ -19,7 +21,7 @@ function PropertyFilters({
   minPrice,
   maxPrice,
   onMinPriceChange,
-  onMaxPriceChange
+  onMaxPriceChange,
 }: PropertyFiltersProps) {
 
   function handleTypeChange(
@@ -31,9 +33,19 @@ function PropertyFilters({
     if (isChecked) {
       onTypesChange([...selectedTypes, type]);
     } else {
-      onTypesChange(selectedTypes.filter((t) => t !== type));
+      onTypesChange(
+        selectedTypes.filter(
+          (selectedType) => selectedType !== type
+        )
+      );
     }
   }
+
+  const minPriceValue =
+    minPrice === "" ? 0 : Number(minPrice);
+
+  const maxPriceValue =
+    maxPrice === "" ? MAX_PRICE : Number(maxPrice);
 
   return (
     <div className="property-filters-wrapper">
@@ -44,6 +56,7 @@ function PropertyFilters({
         onClick={onToggle}
       >
         <span>Filters</span>
+
         <span className="property-filters__arrow">
           {isOpen ? "▲" : "▼"}
         </span>
@@ -51,8 +64,12 @@ function PropertyFilters({
 
       {isOpen && (
         <div className="property-filters__panel">
+
           <div className="property-filters__group">
-            <h3 className="property-filters__title">Property Type</h3>
+            <h3 className="property-filters__title">
+              Property Type
+            </h3>
+
             <label>
               <input
                 type="checkbox"
@@ -62,6 +79,7 @@ function PropertyFilters({
               />
               Villa
             </label>
+
             <label>
               <input
                 type="checkbox"
@@ -71,6 +89,7 @@ function PropertyFilters({
               />
               Apartment
             </label>
+
             <label>
               <input
                 type="checkbox"
@@ -83,28 +102,72 @@ function PropertyFilters({
           </div>
 
           <div className="property-filters__group">
-            <h3 className="property-filters__title">Price Range</h3>
+            <h3 className="property-filters__title">
+              Price Range
+            </h3>
+
+            <div className="property-filters__price-range">
+
+              <div className="property-filters__price-track"></div>
+
+              <div
+                className="property-filters__price-selected"
+                style={{
+                  left: `${(minPriceValue / MAX_PRICE) * 100}%`,
+                  right: `${
+                    100 -
+                    (maxPriceValue / MAX_PRICE) * 100
+                  }%`,
+                }}
+              ></div>
+
+              <input
+                type="range"
+                min="0"
+                max={MAX_PRICE}
+                step="100000"
+                value={minPriceValue}
+                onChange={(e) =>
+                  onMinPriceChange(e.target.value)
+                }
+              />
+
+              <input
+                type="range"
+                min="0"
+                max={MAX_PRICE}
+                step="100000"
+                value={maxPriceValue}
+                onChange={(e) =>
+                  onMaxPriceChange(e.target.value)
+                }
+              />
+
+            </div>
+
             <div className="property-filters__price-inputs">
-              <label>
-                Min Price
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={minPrice}
-                  onChange={(e) => onMinPriceChange(e.target.value)}
-                />
-              </label>
-              <label>
-                Max Price
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={maxPrice}
-                  onChange={(e) => onMaxPriceChange(e.target.value)}
-                />
-              </label>
+
+              <input
+                type="number"
+                placeholder="Min Price"
+                value={minPrice}
+                onChange={(e) =>
+                  onMinPriceChange(e.target.value)
+                }
+              />
+
+              <input
+                type="number"
+                placeholder="Max Price"
+                value={maxPrice}
+                onChange={(e) =>
+                  onMaxPriceChange(e.target.value)
+                }
+              />
+
             </div>
           </div>
+
         </div>
       )}
 
