@@ -7,6 +7,10 @@ import PropertyFilters from "../components/PropertyFilters/PropertyFilters";
 import PropertySort from "../components/PropertySort/PropertySort";
 import { properties } from "../data/properties";
 
+function getNumericPrice(price: string) {
+  return Number(price.replace(/[^\d]/g, ""));
+}
+
 function Buy() {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
@@ -18,7 +22,7 @@ function Buy() {
   function handleSearch() {
   }
 
-  // Filter properties by city + address + type
+  // Filter properties by search, property type, and price
   const q = query.trim().toLowerCase(); // q is a part of the query for example city like "cope"
 
   const filteredProperties = properties.filter((property) => {
@@ -31,9 +35,7 @@ function Buy() {
       selectedTypes.length === 0 ||
       selectedTypes.includes(property.type);
 
-    const propertyPrice = Number(
-      property.price.replace(/[^\d]/g, "")
-    );
+    const propertyPrice = getNumericPrice(property.price);
 
     const matchesPrice =
       (minPrice === "" || propertyPrice >= Number(minPrice)) &&
@@ -41,22 +43,20 @@ function Buy() {
 
     return matchesSearch && matchesType && matchesPrice;
   });
-  // Sortting
-  const sortedProperties = [...filteredProperties]
+  // Sorting
+  const sortedProperties = [...filteredProperties];
   if (sortBy === "newest") {
     sortedProperties.sort((a, b) => b.id - a.id);
   }
   if (sortBy === "price-low") {
     sortedProperties.sort((a, b) =>
-      Number(a.price.replace(/[^\d]/g, "")) -
-      Number(b.price.replace(/[^\d]/g, ""))
+      getNumericPrice(a.price) - getNumericPrice(b.price)
     );
   }
 
   if (sortBy === "price-high") {
     sortedProperties.sort((a, b) =>
-      Number(b.price.replace(/[^\d]/g, "")) -
-      Number(a.price.replace(/[^\d]/g, ""))
+      getNumericPrice(b.price) - getNumericPrice(a.price)
     );
   }
 
