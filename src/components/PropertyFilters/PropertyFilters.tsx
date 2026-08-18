@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import "./PropertyFilters.css";
 
 type PropertyFiltersProps = {
@@ -23,6 +24,23 @@ function PropertyFilters({
   onMinPriceChange,
   onMaxPriceChange,
 }: PropertyFiltersProps) {
+  const filtersRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        filtersRef.current &&
+        !filtersRef.current.contains(event.target as Node)
+      ) {
+        onToggle();
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onToggle]);
 
   function handleTypeChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -63,7 +81,7 @@ function PropertyFilters({
   }
 
   return (
-    <div className="property-filters-wrapper">
+    <div className="property-filters-wrapper" ref={filtersRef}>
 
       <button
         type="button"
