@@ -47,6 +47,21 @@ function PropertyFilters({
   const maxPriceValue =
     maxPrice === "" ? MAX_PRICE : Number(maxPrice);
 
+  function handleMinPriceChange(value: string) {
+    const newMinPrice = Number(value);
+
+    if (newMinPrice <= maxPriceValue) {
+      onMinPriceChange(value);
+    }
+  }
+  function handleMaxPriceChange(value: string) {
+    const newMaxPrice = Number(value);
+
+    if (newMaxPrice >= minPriceValue) {
+      onMaxPriceChange(value);
+    }
+  }
+
   return (
     <div className="property-filters-wrapper">
 
@@ -114,10 +129,9 @@ function PropertyFilters({
                 className="property-filters__price-selected"
                 style={{
                   left: `${(minPriceValue / MAX_PRICE) * 100}%`,
-                  right: `${
-                    100 -
+                  right: `${100 -
                     (maxPriceValue / MAX_PRICE) * 100
-                  }%`,
+                    }%`,
                 }}
               ></div>
 
@@ -127,9 +141,7 @@ function PropertyFilters({
                 max={MAX_PRICE}
                 step="100000"
                 value={minPriceValue}
-                onChange={(e) =>
-                  onMinPriceChange(e.target.value)
-                }
+                onChange={(e) => handleMinPriceChange(e.target.value)}
               />
 
               <input
@@ -138,9 +150,7 @@ function PropertyFilters({
                 max={MAX_PRICE}
                 step="100000"
                 value={maxPriceValue}
-                onChange={(e) =>
-                  onMaxPriceChange(e.target.value)
-                }
+                onChange={(e) => handleMaxPriceChange(e.target.value)}
               />
 
             </div>
@@ -152,7 +162,7 @@ function PropertyFilters({
                 placeholder="Min Price"
                 value={minPrice}
                 onChange={(e) =>
-                  onMinPriceChange(e.target.value)
+                  handleMinPriceChange(e.target.value)
                 }
               />
 
@@ -161,7 +171,7 @@ function PropertyFilters({
                 placeholder="Max Price"
                 value={maxPrice}
                 onChange={(e) =>
-                  onMaxPriceChange(e.target.value)
+                  handleMaxPriceChange(e.target.value)
                 }
               />
 
