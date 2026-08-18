@@ -11,15 +11,14 @@
 }
 
 .buy-page__header {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-
+    box-sizing: border-box;
     background: #f5f8ff;
 
     padding-top: 100px;
     padding-bottom: 24px;
-    padding-left: max(32px, calc((100vw - 1400px) / 2 + 32px));
-    padding-right: max(32px, calc((100vw - 1400px) / 2 + 32px));
+
+    box-shadow: 0 0 0 100vmax #f5f8ff;
+    clip-path: inset(0 -100vmax);
 
     display: flex;
     flex-direction: column;
@@ -37,8 +36,8 @@
 
 .buy-page__controls {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 16px;
 }
 
 .buy-page__control-button {
