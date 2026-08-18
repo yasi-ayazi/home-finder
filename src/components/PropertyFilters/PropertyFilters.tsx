@@ -65,6 +65,11 @@ function PropertyFilters({
   const maxPriceValue =
     maxPrice === "" ? MAX_PRICE : Number(maxPrice);
 
+  const hasPriceFilter = minPrice !== "" || maxPrice !== "";
+
+  const activeFilterCount =
+    selectedTypes.length + (hasPriceFilter ? 1 : 0);
+
   function handleMinPriceChange(value: string) {
     const newMinPrice = Number(value);
 
@@ -89,6 +94,12 @@ function PropertyFilters({
         onClick={onToggle}
       >
         <span>Filters</span>
+
+        {activeFilterCount > 0 && (
+          <span className="property-filters__count">
+            {activeFilterCount}
+          </span>
+        )}
 
         <span className="property-filters__arrow">
           {isOpen ? "▲" : "▼"}
