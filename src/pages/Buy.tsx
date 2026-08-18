@@ -78,31 +78,33 @@ function Buy() {
         </div>
       </section>
 
-      <section className="buy-page__controls">
-        <PropertyFilters
-          isOpen={isFiltersOpen}
-          onToggle={() => setIsFiltersOpen(!isFiltersOpen)}
-          selectedTypes={selectedTypes}
-          onTypesChange={setSelectedTypes}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-        />
-        <PropertySort
-          sortBy={sortBy}
-          onSortChange={setSortBy}
-        />
-      </section>
+      <div className="buy-page__main">
+        <section className="buy-page__controls">
+          <PropertyFilters
+            isOpen={isFiltersOpen}
+            onToggle={() => setIsFiltersOpen(!isFiltersOpen)}
+            selectedTypes={selectedTypes}
+            onTypesChange={setSelectedTypes}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            onMinPriceChange={setMinPrice}
+            onMaxPriceChange={setMaxPrice}
+          />
+          <PropertySort
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+          />
+        </section>
 
-      <section className="buy-page__active-filters">
-        {/* Active filter tags */}
-      </section>
+        <section className="buy-page__active-filters">
+          {/* Active filter tags */}
+        </section>
 
-      <section className="buy-page__content">
-        <PropertyList properties={sortedProperties} />
-        <PropertyMap />
-      </section>
+        <section className="buy-page__content">
+          <PropertyList properties={sortedProperties} />
+          <PropertyMap />
+        </section>
+      </div>
 
       <section className="buy-page__pagination">
         {/* Load More / Pagination */}

@@ -34,6 +34,12 @@
     width: 100%;
 }
 
+.buy-page__main {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .buy-page__controls {
     display: flex;
     align-items: center;
