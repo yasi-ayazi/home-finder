@@ -18,8 +18,13 @@ function Buy() {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [visibleCount, setVisibleCount] = useState(4);
 
   function handleSearch() {
+  }
+
+  function handleLoadMore() {
+    setVisibleCount((prev) => prev + 4);
   }
 
   // Filter properties by search, property type, and price
@@ -59,6 +64,8 @@ function Buy() {
       getNumericPrice(b.price) - getNumericPrice(a.price)
     );
   }
+
+  const visibleProperties = sortedProperties.slice(0, visibleCount);
 
   return (
     <main className="buy-page">
@@ -101,13 +108,17 @@ function Buy() {
         </section>
 
         <section className="buy-page__content">
-          <PropertyList properties={sortedProperties} />
+          <PropertyList properties={visibleProperties} />
           <PropertyMap />
         </section>
       </div>
 
       <section className="buy-page__pagination">
-        {/* Load More / Pagination */}
+        {visibleCount < sortedProperties.length && (
+          <button onClick={handleLoadMore} className="load-more-btn">
+            Load More
+          </button>
+        )}
       </section>
 
 
