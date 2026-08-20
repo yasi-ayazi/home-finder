@@ -66,4 +66,55 @@ export const properties: Property[] = [
 
     badges: ["Featured", "Reduced Price"],
   },
+
+  {
+    id: 4,
+    image: "/images/property-4.jpg",
+
+    price: "2,750,000 DKK",
+    address: "Frederiksberg Allé 82",
+    city: "Frederiksberg",
+
+    type: "Apartment",
+
+    bedrooms: 3,
+    bathrooms: 2,
+    area: "118 m²",
+
+    badges: ["New"],
+  },
+
+  {
+    id: 5,
+    image: "/images/property-5.jpg",
+
+    price: "4,150,000 DKK",
+    address: "Skovvej 28",
+    city: "Aarhus",
+
+    type: "Villa",
+
+    bedrooms: 4,
+    bathrooms: 2,
+    area: "175 m²",
+
+    badges: ["Featured"],
+  },
+
+  {
+    id: 6,
+    image: "/images/property-6.jpg",
+
+    price: "2,150,000 DKK",
+    address: "Havneparken 16",
+    city: "Odense",
+
+    type: "Townhouse",
+
+    bedrooms: 3,
+    bathrooms: 2,
+    area: "132 m²",
+
+    badges: ["Open House"],
+  },
 ];
