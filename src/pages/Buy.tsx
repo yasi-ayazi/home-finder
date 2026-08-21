@@ -115,7 +115,7 @@ function Buy() {
 
       <section className="buy-page__pagination">
         {visibleCount < sortedProperties.length && (
-          <button onClick={handleLoadMore} className="load-more-btn">
+          <button onClick={handleLoadMore} className="buy-page__load-more">
             Load More
           </button>
         )}
