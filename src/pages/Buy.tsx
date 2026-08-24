@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Buy.css";
 import SearchBox from "../components/SearchBox/SearchBox";
 import PropertyList from "../components/PropertyList/PropertyList";
@@ -19,12 +19,21 @@ function Buy() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
+  useEffect(() => { setVisibleCount(4); }, [query, selectedTypes, minPrice, maxPrice]);
 
   function handleSearch() {
   }
 
   function handleLoadMore() {
     setVisibleCount((prev) => prev + 4);
+  }
+
+  function handleRemoveType(type: string) {
+    setSelectedTypes(
+      selectedTypes.filter(
+        (selectedType) => selectedType !== type
+      )
+    );
   }
 
   // Filter properties by search, property type, and price
@@ -104,7 +113,15 @@ function Buy() {
         </section>
 
         <section className="buy-page__active-filters">
-          {/* Active filter tags */}
+          {selectedTypes.map((selectedType) => (
+            <button
+              key={selectedType}
+              onClick={() => handleRemoveType(selectedType)}
+              className="buy-page__filter-tag">
+              <span>×</span>
+              {selectedType}
+            </button>
+          ))}
         </section>
 
         <section className="buy-page__content">
