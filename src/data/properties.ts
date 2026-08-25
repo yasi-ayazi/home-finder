@@ -1,19 +1,18 @@
 export type Property = {
   id: number;
   image: string;
-
   price: string;
   address: string;
   city: string;
-
   type: string;
-
   bedrooms: number;
   bathrooms: number;
   area: string;
-
   badges: string[];
+  latitude: number;
+  longitude: number;
 };
+
 
 export const properties: Property[] = [
   {
@@ -31,6 +30,9 @@ export const properties: Property[] = [
     area: "145 m²",
 
     badges: ["Featured", "New"],
+
+    latitude: 55.6761,
+    longitude: 12.5683,
   },
 
   {
@@ -48,6 +50,9 @@ export const properties: Property[] = [
     area: "95 m²",
 
     badges: ["Open House"],
+
+    latitude: 55.6995,
+    longitude: 12.5537,
   },
 
   {
@@ -65,6 +70,9 @@ export const properties: Property[] = [
     area: "180 m²",
 
     badges: ["Featured", "Reduced Price"],
+
+    latitude: 56.1629,
+    longitude: 10.2039,
   },
 
   {
@@ -82,6 +90,9 @@ export const properties: Property[] = [
     area: "118 m²",
 
     badges: ["New"],
+
+    latitude: 55.6759,
+    longitude: 12.5321,
   },
 
   {
@@ -99,6 +110,9 @@ export const properties: Property[] = [
     area: "175 m²",
 
     badges: ["Featured"],
+
+    latitude: 56.1702,
+    longitude: 10.2137,
   },
 
   {
@@ -116,5 +130,8 @@ export const properties: Property[] = [
     area: "132 m²",
 
     badges: ["Open House"],
+
+    latitude: 55.4038,
+    longitude: 10.4024,
   },
 ];
