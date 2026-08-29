@@ -5,7 +5,7 @@ import PropertyList from "../components/PropertyList/PropertyList";
 import PropertyMap from "../components/PropertyMap/PropertyMap";
 import PropertyFilters from "../components/PropertyFilters/PropertyFilters";
 import PropertySort from "../components/PropertySort/PropertySort";
-import { properties } from "../data/properties";
+import type { Property } from "../data/properties";
 
 function getNumericPrice(price: string) {
   return Number(price.replace(/[^\d]/g, ""));
@@ -19,7 +19,16 @@ function Buy() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
+  const [properties, setProperties] = useState<Property[]>([]);
   useEffect(() => { setVisibleCount(4); }, [query, selectedTypes, minPrice, maxPrice]);
+  useEffect(() => { async function loadProperties() {
+    const res = await fetch("http://localhost:3000/api/properties");
+    const data = await res.json();
+    setProperties(data);}
+
+  loadProperties();
+}, []);
+
 
   function handleSearch() {
   }
