@@ -20,14 +20,27 @@ function Buy() {
   const [maxPrice, setMaxPrice] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
   const [properties, setProperties] = useState<Property[]>([]);
-  useEffect(() => { setVisibleCount(4); }, [query, selectedTypes, minPrice, maxPrice]);
-  useEffect(() => { async function loadProperties() {
-    const res = await fetch("http://localhost:3000/api/properties");
-    const data = await res.json();
-    setProperties(data);}
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  loadProperties();
-}, []);
+  useEffect(() => { setVisibleCount(4); }, [query, selectedTypes, minPrice, maxPrice]);
+  useEffect(() => {
+    async function loadProperties() {
+      try {
+        const res = await fetch("http://localhost:3000/api/properties");
+        if (!res.ok) { throw new Error("Failed to load properties"); }
+        const data = await res.json();
+        setProperties(data);
+        setError("");
+      } catch (error) {
+        setError("Failed to load properties");
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    loadProperties();
+  }, []);
 
 
   function handleSearch() {
@@ -134,8 +147,16 @@ function Buy() {
         </section>
 
         <section className="buy-page__content">
-          <PropertyList properties={visibleProperties} />
-          <PropertyMap />
+          {error ? (
+            <p className="buy-page__error">{error}</p>
+          ) : loading ? (
+            <p className="buy-page__loading">Loading properties...</p>
+          ) : (
+            <>
+              <PropertyList properties={visibleProperties} />
+              <PropertyMap />
+            </>
+          )}
         </section>
       </div>
 
