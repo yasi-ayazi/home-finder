@@ -154,7 +154,7 @@ function Buy() {
           ) : (
             <>
               <PropertyList properties={visibleProperties} />
-              <PropertyMap />
+              <PropertyMap properties={properties} />
             </>
           )}
         </section>

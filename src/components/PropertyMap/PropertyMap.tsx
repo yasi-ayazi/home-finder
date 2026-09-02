@@ -1,7 +1,8 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./PropertyMap.css";
-import { properties } from "../../data/properties";
+
+import type { Property } from "../../types/property";
 
 function MapResizeHandler() {
   const map = useMap();
@@ -12,8 +13,11 @@ function MapResizeHandler() {
 
   return null;
 }
+type PropertyMapProps = {
+  properties: Property[];
+};
 
-function PropertyMap() {
+function PropertyMap({ properties }: PropertyMapProps) {
   return (
     <aside className="buy-page__map">
       <MapContainer center={[56.1, 10.5]} zoom={7}>
