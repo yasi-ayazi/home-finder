@@ -1,100 +1,107 @@
-export type Property = {
+export type SeedProperty = {
     id: number;
-    image: string;
-    price: string;
+    priceAmount: number;
+    currency: string;
     address: string;
     city: string;
-    type: string;
+    propertyType: string;
     bedrooms: number;
     bathrooms: number;
-    area: string;
+    areaSquareMetres: number;
     badges: string[];
+    mediaKey: string;
     latitude: number;
     longitude: number;
 };
 
-export const properties: Property[] = [
+export const seedProperties: SeedProperty[] = [
     {
         id: 1,
-        image: "/images/property-1.jpg",
-        price: "2,450,000 DKK",
+        priceAmount: 2450000,
+        currency: "DKK",
         address: "Strandvejen 45",
         city: "Copenhagen",
-        type: "Villa",
+        propertyType: "Villa",
         bedrooms: 3,
         bathrooms: 2,
-        area: "145 m²",
+        areaSquareMetres: 145,
         badges: ["Featured", "New"],
+        mediaKey: "properties/property-1.jpg",
         latitude: 55.6761,
         longitude: 12.5683,
     },
     {
         id: 2,
-        image: "/images/property-2.jpg",
-        price: "1,850,000 DKK",
+        priceAmount: 1850000,
+        currency: "DKK",
         address: "Nørrebrogade 210",
         city: "Copenhagen",
-        type: "Apartment",
+        propertyType: "Apartment",
         bedrooms: 2,
         bathrooms: 1,
-        area: "95 m²",
+        areaSquareMetres: 95,
         badges: ["Open House"],
+        mediaKey: "properties/property-2.jpg",
         latitude: 55.6995,
         longitude: 12.5537,
     },
     {
         id: 3,
-        image: "/images/property-3.jpg",
-        price: "3,200,000 DKK",
+        priceAmount: 3200000,
+        currency: "DKK",
         address: "Havnevej 12",
         city: "Aarhus",
-        type: "Townhouse",
+        propertyType: "Townhouse",
         bedrooms: 4,
         bathrooms: 3,
-        area: "180 m²",
+        areaSquareMetres: 180,
         badges: ["Featured", "Reduced Price"],
+        mediaKey: "properties/property-3.jpg",
         latitude: 56.1629,
         longitude: 10.2039,
     },
     {
         id: 4,
-        image: "/images/property-4.jpg",
-        price: "2,750,000 DKK",
+        priceAmount: 2750000,
+        currency: "DKK",
         address: "Frederiksberg Allé 82",
         city: "Frederiksberg",
-        type: "Apartment",
+        propertyType: "Apartment",
         bedrooms: 3,
         bathrooms: 2,
-        area: "118 m²",
+        areaSquareMetres: 118,
         badges: ["New"],
+        mediaKey: "properties/property-4.jpg",
         latitude: 55.6759,
         longitude: 12.5321,
     },
     {
         id: 5,
-        image: "/images/property-5.jpg",
-        price: "4,150,000 DKK",
+        priceAmount: 4150000,
+        currency: "DKK",
         address: "Skovvej 28",
         city: "Aarhus",
-        type: "Villa",
+        propertyType: "Villa",
         bedrooms: 4,
         bathrooms: 2,
-        area: "175 m²",
+        areaSquareMetres: 175,
         badges: ["Featured"],
+        mediaKey: "properties/property-5.jpg",
         latitude: 56.1702,
         longitude: 10.2137,
     },
     {
         id: 6,
-        image: "/images/property-6.jpg",
-        price: "2,150,000 DKK",
+        priceAmount: 2150000,
+        currency: "DKK",
         address: "Havneparken 16",
         city: "Odense",
-        type: "Townhouse",
+        propertyType: "Townhouse",
         bedrooms: 3,
         bathrooms: 2,
-        area: "132 m²",
+        areaSquareMetres: 132,
         badges: ["Open House"],
+        mediaKey: "properties/property-6.jpg",
         latitude: 55.4038,
         longitude: 10.4024,
     },

@@ -1,6 +1,6 @@
 export type Property = {
     id: number;
-    image: string;
+    imageUrl: string;
     price: string;
     address: string;
     city: string;

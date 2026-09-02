@@ -6,7 +6,6 @@ function Hero() {
         <section className="hero">
             <div className="hero__content">
                 <SearchPanel />
-
             </div>
         </section>
     );

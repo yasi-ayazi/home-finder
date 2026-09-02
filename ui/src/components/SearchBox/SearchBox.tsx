@@ -26,10 +26,7 @@ function SearchBox({
                 }
             />
 
-            <button
-                type="button"
-                onClick={onSearch}
-            >
+            <button type="button" onClick={onSearch}>
                 Search
             </button>
         </div>

@@ -69,7 +69,7 @@
 .footer__social a {
     font-size: 1rem;
     color: #565657;
-    transition: color .2s;
+    transition: color 0.2s;
 }
 
 .footer__social a:hover {

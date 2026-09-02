@@ -26,7 +26,6 @@ function SearchPanel() {
                 onQueryChange={setQuery}
                 onSearch={handleSearch}
             />
-
         </div>
     );
 }

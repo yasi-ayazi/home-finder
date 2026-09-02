@@ -2,20 +2,20 @@
     display: flex;
     flex-direction: column;
     background: var(--bg);
-    border: 1px solid #ECECEC;
+    border: 1px solid #ececec;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, .05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
     cursor: pointer;
 
     transition:
-        transform .2s,
-        box-shadow .2s;
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
 .property-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
 }
 
 .property-card__image {
@@ -39,14 +39,13 @@
 }
 
 .property-card__badge {
-    font-size: .75rem;
+    font-size: 0.75rem;
     padding: 4px 8px;
-    background: #EEF4FF;
+    background: #eef4ff;
     color: var(--primary);
     font-weight: 600;
     border-radius: 2px;
 }
-
 
 .property-card__address {
     margin-bottom: 4px;
@@ -57,7 +56,7 @@
 }
 
 .property-card__details {
-    font-size: .9rem;
+    font-size: 0.9rem;
     line-height: 1.45;
     color: var(--text);
 }

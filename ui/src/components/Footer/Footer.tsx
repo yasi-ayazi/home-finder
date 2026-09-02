@@ -4,30 +4,37 @@ import "./Footer.css";
 function Footer() {
     return (
         <footer className="footer">
-
             <div className="footer__container">
-
                 <div className="footer__brand">
-                    <h2 className="footer__logo">
-                        HomeFinder
-                    </h2>
+                    <h2 className="footer__logo">HomeFinder</h2>
 
                     <p className="footer__text">
                         Find your next home across Denmark.
                     </p>
 
                     <div className="footer__social">
-                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.facebook.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaFacebookF />
                         </a>
-                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaInstagram />
                         </a>
-                        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.linkedin.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaLinkedinIn />
                         </a>
                     </div>
-
                 </div>
 
                 <div className="footer__links">
@@ -54,13 +61,11 @@ function Footer() {
                     <p>hello@homefinder.dk</p>
                     <p>+45 12 34 56 78</p>
                 </div>
-
             </div>
 
             <div className="footer__bottom">
                 © 2026 HomeFinder. All rights reserved.
             </div>
-
         </footer>
     );
 }

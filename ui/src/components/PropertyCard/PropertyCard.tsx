@@ -2,7 +2,7 @@ import "./PropertyCard.css";
 
 type PropertyCardProps = {
     id: number;
-    image: string;
+    imageUrl: string;
 
     price: string;
     address: string;
@@ -18,7 +18,7 @@ type PropertyCardProps = {
 };
 
 function PropertyCard({
-    image,
+    imageUrl,
 
     price,
     address,
@@ -29,22 +29,17 @@ function PropertyCard({
 }: PropertyCardProps) {
     return (
         <article className="property-card">
-
             <img
                 className="property-card__image"
-                src={image}
+                src={imageUrl}
                 alt={address}
             />
 
             <div className="property-card__content">
-
                 {/* Property badges */}
                 <div className="property-card__badges">
                     {badges.map((badge) => (
-                        <span
-                            key={badge}
-                            className="property-card__badge"
-                        >
+                        <span key={badge} className="property-card__badge">
                             {badge}
                         </span>
                     ))}
@@ -57,9 +52,7 @@ function PropertyCard({
                 <p className="property-card__details">
                     {type} | {area} | {price}
                 </p>
-
             </div>
-
         </article>
     );
 }
