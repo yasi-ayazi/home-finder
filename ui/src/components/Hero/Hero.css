@@ -1,0 +1,17 @@
+.hero {
+    height: 80vh;
+    background-image: url("../../assets/images/hero.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 180px;
+    padding-left: 64px;
+    min-height: 400px;
+}
