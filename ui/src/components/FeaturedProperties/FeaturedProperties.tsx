@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./FeaturedProperties.css";
 import PropertyCard from "../PropertyCard/PropertyCard";
 import type { Property } from "../../types/property";
+import { apiUrl } from "../../config";
 
 function FeaturedProperties() {
     const [properties, setProperties] = useState<Property[]>([]);
@@ -13,7 +14,7 @@ function FeaturedProperties() {
 
         async function loadFeaturedProperties() {
             try {
-                const response = await fetch("http://localhost:3000/api/properties", {
+                const response = await fetch(`${apiUrl}/api/properties`, {
                     signal: controller.signal,
                 });
 
