@@ -10,5 +10,5 @@
         "outDir": "dist-server",
         "rootDir": "."
     },
-    "include": ["server/**/*.ts", "src/data/properties.ts"]
+    "include": ["server/**/*.ts"]
 }

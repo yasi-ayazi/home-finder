@@ -5,7 +5,7 @@ import PropertyList from "../components/PropertyList/PropertyList";
 import PropertyMap from "../components/PropertyMap/PropertyMap";
 import PropertyFilters from "../components/PropertyFilters/PropertyFilters";
 import PropertySort from "../components/PropertySort/PropertySort";
-import type { Property } from "../data/properties";
+import type { Property } from "../types/property";
 
 function getNumericPrice(price: string) {
   return Number(price.replace(/[^\d]/g, ""));

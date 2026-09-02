@@ -1,7 +1,7 @@
 import express from "express";
 import path from "node:path";
 
-import { properties } from "../src/data/properties.js";
+import { properties } from "./data/properties.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;

@@ -1,5 +1,5 @@
 import PropertyCard from "../PropertyCard/PropertyCard";
-import type { Property } from "../../data/properties";
+import type { Property } from "../../types/property";
 import "./PropertyList.css";
 
 type PropertyListProps = {
