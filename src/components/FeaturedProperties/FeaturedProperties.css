@@ -27,3 +27,14 @@
     gap: 32px;
     margin-top: 48px;
 }
+
+.featured-properties__status {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: center;
+    color: var(--text);
+}
+
+.featured-properties__status--error {
+    color: #b42318;
+}
