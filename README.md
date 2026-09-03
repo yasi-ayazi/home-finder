@@ -68,6 +68,8 @@ postgres → migrate → seed → server → ui
 
 `migrate` applies pending database migrations. After it succeeds, the one-shot `seed` service inserts the six sample properties and copies their images into the persistent media volume. The seed uses conflict-safe inserts and copies only missing files, so running `docker compose up --build` again does not create duplicate records or overwrite existing media. The server starts only after seeding succeeds, and the UI starts only after the server readiness check passes.
 
+The files under `server/seed-media` are seed inputs and are not served directly. In Docker, `/media/...` is served from the `property_media` volume mounted at `/app/storage`.
+
 Stop containers while retaining data:
 
 ```powershell
@@ -98,11 +100,12 @@ docker compose up -d postgres
 cd server
 npm install
 npm run db:migrate
-npm run db:seed
 npm run dev
 ```
 
-The defaults connect to the Compose PostgreSQL port and store seeded media beneath `server/storage`. Seeding is idempotent: existing property IDs and media files are not overwritten.
+The defaults connect to the Compose PostgreSQL port and serve media from `server/storage`. `npm run dev` first runs the idempotent seed, which inserts any missing sample records and copies any missing files from `server/seed-media` into `server/storage`, then starts the API in watch mode. Existing property IDs and media files are not overwritten.
+
+Run `npm run dev:watch` only when the database and runtime media storage have already been initialized and you intentionally want to skip that startup check.
 
 Migration commands:
 
@@ -123,6 +126,8 @@ npm run dev
 ```
 
 Open `http://localhost:5173`. Vite proxies `/api` and `/media` to `http://localhost:3000`.
+
+Use either the native API or the Docker API at one time: both use host port `3000` by default. Stop the native API before starting the complete Compose stack, or configure a different `SERVER_PORT` for Docker.
 
 ## API
 
