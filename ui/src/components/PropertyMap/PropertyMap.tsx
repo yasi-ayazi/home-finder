@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
@@ -41,7 +41,26 @@ function PropertyMap({ properties }: PropertyMapProps) {
                             key={property.id}
                             position={[property.latitude, property.longitude]}
                             icon={propertyIcon}
-                        />
+                        >
+                            <Popup>
+                                <div className="property-popup">
+                                    <img
+                                        className="property-popup__image"
+                                        src={property.imageUrl}
+                                        alt={property.address}
+                                    />
+                                    <div className="property-popup__content">
+                                        <p className="property-popup__address">
+                                            {property.address}, {property.city}
+                                        </p>
+                                        <p className="property-popup__details">
+                                            {property.type} | {property.area} |{" "}
+                                            {property.price}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Popup>
+                        </Marker>
                     ))}
                 </MarkerClusterGroup>
                 <MapResizeHandler />
