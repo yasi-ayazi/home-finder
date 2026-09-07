@@ -61,3 +61,52 @@
     border-right: 9px solid transparent;
     border-top: 8px solid white;
 }
+
+.property-popup {
+    width: 403px;
+    display: flex;
+    align-items: stretch;
+}
+
+.property-popup__image {
+    width: 150px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px 0 0 6px;
+    flex-shrink: 0;
+}
+
+.property-popup__content {
+    flex: 1;
+    padding: 0 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.property-popup__address {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111;
+}
+
+.property-popup__details {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #666;
+    white-space: nowrap;
+}
+
+.buy-page__map .leaflet-popup-content {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.buy-page__map .leaflet-popup-content-wrapper {
+    padding: 0;
+    overflow: hidden;
+}
