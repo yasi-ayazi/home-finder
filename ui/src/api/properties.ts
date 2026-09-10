@@ -19,3 +19,27 @@ export async function fetchProperties(
         imageUrl: resolveApiResource(property.imageUrl),
     }));
 }
+
+export async function fetchProperty(
+    id: string,
+    signal?: AbortSignal,
+): Promise<Property> {
+    const response = await fetch(`${apiUrl}/api/properties/${id}`, { signal });
+
+    if (!response.ok) {
+        throw new Error("Failed to load property");
+    }
+
+    const data: unknown = await response.json();
+
+    if (typeof data !== "object" || data === null) {
+        throw new Error("Invalid property response");
+    }
+
+    const property = data as Property;
+
+    return {
+        ...property,
+        imageUrl: resolveApiResource(property.imageUrl),
+    };
+}
