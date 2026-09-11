@@ -21,11 +21,23 @@ describeDatabase("PostgresPropertyRepository", () => {
         expect(properties[0]).toMatchObject({
             id: 1,
             mediaKey: "properties/property-1.jpg",
+            galleryMediaKeys: [
+                "properties/property-1-2.jpg",
+                "properties/property-1-3.jpg",
+            ],
+            description: expect.any(String),
         });
     });
 
     it("uses a parameterized lookup and returns null for missing IDs", async () => {
-        await expect(repository.findById(1)).resolves.toMatchObject({ id: 1 });
+        await expect(repository.findById(1)).resolves.toMatchObject({
+            id: 1,
+            galleryMediaKeys: [
+                "properties/property-1-2.jpg",
+                "properties/property-1-3.jpg",
+            ],
+            description: expect.any(String),
+        });
         await expect(repository.findById(999999)).resolves.toBeNull();
     });
 });

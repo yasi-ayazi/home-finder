@@ -15,6 +15,11 @@ export function makeProperty(
         areaSquareMetres: 145,
         badges: ["Featured", "New"],
         mediaKey: "properties/property-1.jpg",
+        galleryMediaKeys: [
+            "properties/property-1-2.jpg",
+            "properties/property-1-3.jpg",
+        ],
+        description: "A bright villa close to the coast and city amenities.",
         latitude: 55.6761,
         longitude: 12.5683,
         createdAt: new Date("2026-01-01T00:00:00Z"),

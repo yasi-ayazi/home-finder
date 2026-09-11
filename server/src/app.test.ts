@@ -20,6 +20,10 @@ describe("Home Finder API", () => {
             path.join(storageRoot, "properties", "property-1.jpg"),
             "image data",
         );
+        await writeFile(
+            path.join(storageRoot, "properties", "property-1-2.jpg"),
+            "gallery image data",
+        );
         repository = {
             findAll: vi.fn().mockResolvedValue([makeProperty()]),
             findById: vi
@@ -64,6 +68,16 @@ describe("Home Finder API", () => {
             .get("/api/properties/1")
             .expect(200);
         expect(detail.body.address).toBe("Strandvejen 45");
+        expect(detail.body).toMatchObject({
+            imageUrl: "/media/properties/property-1.jpg",
+            imageUrls: [
+                "/media/properties/property-1.jpg",
+                "/media/properties/property-1-2.jpg",
+                "/media/properties/property-1-3.jpg",
+            ],
+            description:
+                "A bright villa close to the coast and city amenities.",
+        });
     });
 
     it("validates IDs and handles missing resources", async () => {
@@ -82,6 +96,9 @@ describe("Home Finder API", () => {
         await request(app())
             .get("/media/properties/property-1.jpg")
             .expect(200);
+        await request(app())
+            .get("/media/properties/property-1-2.jpg")
+            .expect(200);
         await request(app()).get("/media/%2e%2e/package.json").expect(404);
     });
 
@@ -90,6 +107,9 @@ describe("Home Finder API", () => {
             .get("/openapi.json")
             .expect(200);
         expect(specification.body.paths["/api/properties/{id}"]).toBeDefined();
+        expect(specification.body.components.schemas.Property.required).toEqual(
+            expect.arrayContaining(["imageUrl", "imageUrls", "description"]),
+        );
         await request(app())
             .get("/docs")
             .expect(200)

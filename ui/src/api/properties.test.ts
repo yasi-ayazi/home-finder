@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { propertyFixture } from "../test/propertyFixture";
-import { fetchProperties } from "./properties";
+import { fetchProperties, fetchProperty } from "./properties";
 
 describe("fetchProperties", () => {
     afterEach(() => vi.unstubAllGlobals());
@@ -16,6 +16,21 @@ describe("fetchProperties", () => {
 
         await expect(fetchProperties()).resolves.toEqual([propertyFixture]);
         expect(fetch).toHaveBeenCalledWith("/api/properties", {
+            signal: undefined,
+        });
+    });
+
+    it("loads one property and maps all media URLs", async () => {
+        vi.stubGlobal(
+            "fetch",
+            vi.fn().mockResolvedValue({
+                ok: true,
+                json: async () => propertyFixture,
+            }),
+        );
+
+        await expect(fetchProperty("1")).resolves.toEqual(propertyFixture);
+        expect(fetch).toHaveBeenCalledWith("/api/properties/1", {
             signal: undefined,
         });
     });
