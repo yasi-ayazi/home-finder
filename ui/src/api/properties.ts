@@ -14,10 +14,7 @@ export async function fetchProperties(
         throw new Error("Invalid properties response");
     }
 
-    return (data as Property[]).map((property) => ({
-        ...property,
-        imageUrl: resolveApiResource(property.imageUrl),
-    }));
+    return (data as Property[]).map(mapPropertyResources);
 }
 
 export async function fetchProperty(
@@ -38,8 +35,13 @@ export async function fetchProperty(
 
     const property = data as Property;
 
+    return mapPropertyResources(property);
+}
+
+function mapPropertyResources(property: Property): Property {
     return {
         ...property,
         imageUrl: resolveApiResource(property.imageUrl),
+        imageUrls: property.imageUrls.map(resolveApiResource),
     };
 }

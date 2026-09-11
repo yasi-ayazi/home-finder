@@ -14,6 +14,8 @@ type PropertyRow = {
     area_square_metres: string;
     badges: string[];
     media_key: string;
+    gallery_media_keys: string[];
+    description: string;
     latitude: string;
     longitude: string;
     created_at: Date;
@@ -22,8 +24,8 @@ type PropertyRow = {
 
 const selectColumns = `
     id, price_amount, currency, address, city, property_type, bedrooms,
-    bathrooms, area_square_metres, badges, media_key, latitude, longitude,
-    created_at, updated_at
+    bathrooms, area_square_metres, badges, media_key, gallery_media_keys,
+    description, latitude, longitude, created_at, updated_at
 `;
 
 function mapRow(row: PropertyRow): PropertyRecord {
@@ -39,6 +41,8 @@ function mapRow(row: PropertyRow): PropertyRecord {
         areaSquareMetres: Number(row.area_square_metres),
         badges: row.badges,
         mediaKey: row.media_key,
+        galleryMediaKeys: row.gallery_media_keys,
+        description: row.description,
         latitude: Number(row.latitude),
         longitude: Number(row.longitude),
         createdAt: row.created_at,
