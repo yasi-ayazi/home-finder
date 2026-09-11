@@ -91,6 +91,7 @@ export const openApiSpecification = {
                 required: [
                     "id",
                     "imageUrl",
+                    "imageUrls",
                     "price",
                     "address",
                     "city",
@@ -98,6 +99,7 @@ export const openApiSpecification = {
                     "bedrooms",
                     "bathrooms",
                     "area",
+                    "description",
                     "badges",
                     "latitude",
                     "longitude",
@@ -108,6 +110,17 @@ export const openApiSpecification = {
                         type: "string",
                         example: "/media/properties/property-1.jpg",
                     },
+                    imageUrls: {
+                        type: "array",
+                        minItems: 1,
+                        description:
+                            "Ordered gallery images; the first item matches imageUrl",
+                        items: { type: "string" },
+                        example: [
+                            "/media/properties/property-1.jpg",
+                            "/media/properties/property-1-2.jpg",
+                        ],
+                    },
                     price: { type: "string", example: "2,450,000 DKK" },
                     address: { type: "string" },
                     city: { type: "string" },
@@ -115,6 +128,7 @@ export const openApiSpecification = {
                     bedrooms: { type: "integer" },
                     bathrooms: { type: "integer" },
                     area: { type: "string", example: "145 m²" },
+                    description: { type: "string" },
                     badges: { type: "array", items: { type: "string" } },
                     latitude: { type: "number" },
                     longitude: { type: "number" },

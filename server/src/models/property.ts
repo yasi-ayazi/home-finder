@@ -10,6 +10,8 @@ export type PropertyRecord = {
     areaSquareMetres: number;
     badges: string[];
     mediaKey: string;
+    galleryMediaKeys: string[];
+    description: string;
     latitude: number;
     longitude: number;
     createdAt: Date;
@@ -19,6 +21,7 @@ export type PropertyRecord = {
 export type PropertyResponse = {
     id: number;
     imageUrl: string;
+    imageUrls: string[];
     price: string;
     address: string;
     city: string;
@@ -26,6 +29,7 @@ export type PropertyResponse = {
     bedrooms: number;
     bathrooms: number;
     area: string;
+    description: string;
     badges: string[];
     latitude: number;
     longitude: number;
