@@ -93,6 +93,41 @@ function PropertyDetails() {
                         </div>
                     </div>
 
+                    <section className="property-details__info">
+                        <div className="property-details__info-details">
+                            <div className="property-details__price-block">
+                                <span className="property-details__price-label">Price</span>
+                                <p className="property-details__price">{property.price}</p>
+                            </div>
+
+                            <div className="property-details__facts">
+                                <div>
+                                    <span>Type</span>
+                                    <strong>{property.type}</strong>
+                                </div>
+                                <div>
+                                    <span>Area</span>
+                                    <strong>{property.area}</strong>
+                                </div>
+                                <div>
+                                    <span>Bedrooms</span>
+                                    <strong>{property.bedrooms}</strong>
+                                </div>
+                                <div>
+                                    <span>Bathrooms</span>
+                                    <strong>{property.bathrooms}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="property-details__about">
+                            <span className="property-details__about-label">
+                                About this property
+                            </span>
+                            <h2>{property.address}</h2>
+                            <p>{property.description}</p>
+                        </div>
+                    </section>
+
                     {isGalleryOpen && (
                         <div className="property-details__lightbox">
                             <span className="property-details__lightbox-counter">
