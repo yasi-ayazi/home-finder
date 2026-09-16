@@ -1,3 +1,4 @@
+import PropertyDetailsMap from "../components/PropertyDetailsMap/PropertyDetailsMap";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProperty } from "../api/properties";
@@ -99,7 +100,6 @@ function PropertyDetails() {
                                 <span className="property-details__price-label">Price</span>
                                 <p className="property-details__price">{property.price}</p>
                             </div>
-
                             <div className="property-details__facts">
                                 <div>
                                     <span>Type</span>
@@ -126,6 +126,13 @@ function PropertyDetails() {
                             <h2>{property.address}</h2>
                             <p>{property.description}</p>
                         </div>
+                    </section>
+
+                    <section className="property-details__location">
+                        <PropertyDetailsMap
+                            latitude={property.latitude}
+                            longitude={property.longitude}
+                        />
                     </section>
 
                     {isGalleryOpen && (

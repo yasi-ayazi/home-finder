@@ -259,3 +259,15 @@
     line-height: 1.9;
     color: #222;
 }
+
+.property-details__location {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px 60px 35px;
+}
+
+.property-details__map-section {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+}
