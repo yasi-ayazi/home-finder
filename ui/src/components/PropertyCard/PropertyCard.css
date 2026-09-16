@@ -60,3 +60,9 @@
     line-height: 1.45;
     color: var(--text);
 }
+
+.property-card__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
