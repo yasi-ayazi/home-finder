@@ -16,21 +16,48 @@ function PropertyDetails() {
     const [showThumbnails, setShowThumbnails] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
+        const propertyId = id;
+
         async function loadProperty() {
-            if (!id) { return; }
-            try {
-                const data = await fetchProperty(id);
-                setProperty(data);
-                setError("");
-            }
-            catch {
-                setError("Failed to load property");
-            }
-            finally {
+            await Promise.resolve();
+            if (controller.signal.aborted) return;
+
+            setProperty(null);
+            setError("");
+            setSelectedImageIndex(0);
+            setIsGalleryOpen(false);
+            setShowThumbnails(true);
+
+            if (!propertyId) {
                 setLoading(false);
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const data = await fetchProperty(propertyId, controller.signal);
+                setProperty(data);
+            } catch (error) {
+                if (
+                    error instanceof DOMException &&
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
+                setError("Failed to load property");
+            } finally {
+                if (!controller.signal.aborted) {
+                    setLoading(false);
+                }
             }
         }
+
         loadProperty();
+
+        return () => controller.abort();
     }, [id]);
 
     useEffect(() => {
