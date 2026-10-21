@@ -17,8 +17,15 @@ describe("PropertyService", () => {
             expect.objectContaining({
                 id: 1,
                 imageUrl: "/media/properties/property-1.jpg",
+                imageUrls: [
+                    "/media/properties/property-1.jpg",
+                    "/media/properties/property-1-2.jpg",
+                    "/media/properties/property-1-3.jpg",
+                ],
                 price: "2,450,000 DKK",
                 area: "145 m²",
+                description:
+                    "A bright villa close to the coast and city amenities.",
             }),
         ]);
     });
@@ -27,6 +34,18 @@ describe("PropertyService", () => {
         expect(() =>
             mapProperty(makeProperty({ mediaKey: "../secret.txt" })),
         ).toThrow("invalid media key");
+        expect(() =>
+            mapProperty(makeProperty({ galleryMediaKeys: ["../secret.txt"] })),
+        ).toThrow("invalid media key");
+    });
+
+    it("uses the main image as the only gallery image when none are added", () => {
+        expect(
+            mapProperty(makeProperty({ galleryMediaKeys: [] })),
+        ).toMatchObject({
+            imageUrl: "/media/properties/property-1.jpg",
+            imageUrls: ["/media/properties/property-1.jpg"],
+        });
     });
 
     it("returns null when a property does not exist", async () => {

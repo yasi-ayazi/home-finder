@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { propertyFixture } from "../../test/propertyFixture";
 import FeaturedProperties from "./FeaturedProperties";
@@ -17,7 +18,11 @@ describe("FeaturedProperties", () => {
             ),
         );
 
-        render(<FeaturedProperties />);
+        render(
+            <MemoryRouter>
+                <FeaturedProperties />
+            </MemoryRouter>,
+        );
         expect(
             screen.getByText("Loading featured properties..."),
         ).toBeInTheDocument();

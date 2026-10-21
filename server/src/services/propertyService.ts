@@ -17,7 +17,8 @@ export class PropertyService {
 }
 
 export function mapProperty(property: PropertyRecord): PropertyResponse {
-    if (!safeMediaKey.test(property.mediaKey)) {
+    const mediaKeys = [property.mediaKey, ...property.galleryMediaKeys];
+    if (mediaKeys.some((mediaKey) => !safeMediaKey.test(mediaKey))) {
         throw new Error("Property has an invalid media key");
     }
 
@@ -31,6 +32,7 @@ export function mapProperty(property: PropertyRecord): PropertyResponse {
     return {
         id: property.id,
         imageUrl: `/media/${property.mediaKey}`,
+        imageUrls: mediaKeys.map((mediaKey) => `/media/${mediaKey}`),
         price: `${new Intl.NumberFormat("en-US").format(property.priceAmount)} ${property.currency}`,
         address: property.address,
         city: property.city,
@@ -38,6 +40,7 @@ export function mapProperty(property: PropertyRecord): PropertyResponse {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms,
         area: `${area} m²`,
+        description: property.description,
         badges: property.badges,
         latitude: property.latitude,
         longitude: property.longitude,
