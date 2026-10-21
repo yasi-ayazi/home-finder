@@ -1,4 +1,5 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import {
     createMemoryRouter,
     RouterProvider,
@@ -36,6 +37,12 @@ function renderPropertyDetails(initialEntry: string) {
     });
     render(<RouterProvider router={router} />);
     return router;
+}
+
+function getLightboxImage() {
+    return document.querySelector<HTMLImageElement>(
+        ".property-details__lightbox-image",
+    );
 }
 
 describe("PropertyDetails data fetching", () => {
@@ -88,8 +95,7 @@ describe("PropertyDetails data fetching", () => {
 
     it("clears stale property and error state while a new ID loads", async () => {
         let resolveThirdRequest:
-            | ((value: typeof propertyFixture) => void)
-            | undefined;
+            ((value: typeof propertyFixture) => void) | undefined;
         fetchPropertyMock
             .mockResolvedValueOnce(propertyFixture)
             .mockRejectedValueOnce(new Error("not found"))
@@ -101,20 +107,30 @@ describe("PropertyDetails data fetching", () => {
             );
 
         const router = renderPropertyDetails("/property/1");
-        expect(await screen.findByText(propertyFixture.address)).toBeInTheDocument();
+        expect(
+            await screen.findByText(propertyFixture.address),
+        ).toBeInTheDocument();
 
         await act(async () => {
             await router.navigate("/property/2");
         });
-        expect(await screen.findByText("Failed to load property")).toBeInTheDocument();
-        expect(screen.queryByText(propertyFixture.address)).not.toBeInTheDocument();
+        expect(
+            await screen.findByText("Failed to load property"),
+        ).toBeInTheDocument();
+        expect(
+            screen.queryByText(propertyFixture.address),
+        ).not.toBeInTheDocument();
 
         await act(async () => {
             await router.navigate("/property/3");
         });
         expect(screen.getByText("Loading...")).toBeInTheDocument();
-        expect(screen.queryByText("Failed to load property")).not.toBeInTheDocument();
-        expect(screen.queryByText(propertyFixture.address)).not.toBeInTheDocument();
+        expect(
+            screen.queryByText("Failed to load property"),
+        ).not.toBeInTheDocument();
+        expect(
+            screen.queryByText(propertyFixture.address),
+        ).not.toBeInTheDocument();
 
         await act(async () => {
             resolveThirdRequest?.({
@@ -124,5 +140,95 @@ describe("PropertyDetails data fetching", () => {
             });
         });
         expect(await screen.findByText("Third property")).toBeInTheDocument();
+    });
+});
+
+describe("PropertyDetails gallery", () => {
+    const fetchPropertyMock = vi.mocked(fetchProperty);
+
+    beforeEach(() => {
+        fetchPropertyMock.mockReset();
+        fetchPropertyMock.mockResolvedValue(propertyFixture);
+    });
+
+    it("opens and closes the lightbox from the main image", async () => {
+        const user = userEvent.setup();
+        renderPropertyDetails("/property/1");
+
+        const galleryImages = await screen.findAllByAltText(
+            propertyFixture.address,
+        );
+        await user.click(galleryImages[0]);
+
+        expect(screen.getByText("1/3")).toBeInTheDocument();
+        expect(getLightboxImage()).toHaveAttribute(
+            "src",
+            propertyFixture.imageUrls[0],
+        );
+        expect(document.body).toHaveStyle({ overflow: "hidden" });
+
+        await user.click(screen.getByRole("button", { name: "Close gallery" }));
+
+        expect(
+            screen.queryByRole("button", { name: "Close gallery" }),
+        ).not.toBeInTheDocument();
+        expect(document.body.style.overflow).toBe("");
+    });
+
+    it("shows next and previous images with wraparound", async () => {
+        const user = userEvent.setup();
+        renderPropertyDetails("/property/1");
+
+        const galleryImages = await screen.findAllByAltText(
+            propertyFixture.address,
+        );
+        await user.click(galleryImages[0]);
+
+        await user.click(
+            screen.getByRole("button", { name: "Previous image" }),
+        );
+        expect(getLightboxImage()).toHaveAttribute(
+            "src",
+            propertyFixture.imageUrls[2],
+        );
+        expect(screen.getByText("3/3")).toBeInTheDocument();
+
+        await user.click(screen.getByRole("button", { name: "Next image" }));
+        expect(getLightboxImage()).toHaveAttribute(
+            "src",
+            propertyFixture.imageUrls[0],
+        );
+        expect(screen.getByText("1/3")).toBeInTheDocument();
+
+        await user.click(screen.getByRole("button", { name: "Next image" }));
+        expect(getLightboxImage()).toHaveAttribute(
+            "src",
+            propertyFixture.imageUrls[1],
+        );
+        expect(screen.getByText("2/3")).toBeInTheDocument();
+    });
+
+    it("selects an image from the lightbox thumbnails", async () => {
+        const user = userEvent.setup();
+        renderPropertyDetails("/property/1");
+
+        const galleryImages = await screen.findAllByAltText(
+            propertyFixture.address,
+        );
+        await user.click(galleryImages[0]);
+
+        const thumbnails = document.querySelectorAll<HTMLImageElement>(
+            ".property-details__lightbox-thumbnail",
+        );
+        await user.click(thumbnails[2]);
+
+        expect(getLightboxImage()).toHaveAttribute(
+            "src",
+            propertyFixture.imageUrls[2],
+        );
+        expect(screen.getByText("3/3")).toBeInTheDocument();
+        expect(thumbnails[2]).toHaveClass(
+            "property-details__lightbox-thumbnail--active",
+        );
     });
 });
