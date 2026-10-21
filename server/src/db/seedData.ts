@@ -116,7 +116,7 @@ export const seedProperties: SeedProperty[] = [
         galleryMediaKeys: [
             "properties/property-5-2.jpg",
             "properties/property-5-3.jpg",
-            "properties/property-5-4.jpg"
+            "properties/property-5-4.jpg",
         ],
         description:
             "A welcoming family villa on a leafy street, offering large bedrooms, a sunny garden, and room for entertaining.",
