@@ -5,7 +5,6 @@ import { fetchProperty } from "../api/properties";
 import type { Property } from "../types/property";
 import "./PropertyDetails.css";
 
-
 function PropertyDetails() {
     const { id } = useParams();
     const [property, setProperty] = useState<Property | null>(null);
@@ -73,7 +72,7 @@ function PropertyDetails() {
         setSelectedImageIndex((currentIndex) =>
             currentIndex === 0
                 ? property.imageUrls.length - 1
-                : currentIndex - 1
+                : currentIndex - 1,
         );
     }
 
@@ -83,7 +82,7 @@ function PropertyDetails() {
         setSelectedImageIndex((currentIndex) =>
             currentIndex === property.imageUrls.length - 1
                 ? 0
-                : currentIndex + 1
+                : currentIndex + 1,
         );
     }
 
@@ -124,8 +123,12 @@ function PropertyDetails() {
                     <section className="property-details__info">
                         <div className="property-details__info-details">
                             <div className="property-details__price-block">
-                                <span className="property-details__price-label">Price</span>
-                                <p className="property-details__price">{property.price}</p>
+                                <span className="property-details__price-label">
+                                    Price
+                                </span>
+                                <p className="property-details__price">
+                                    {property.price}
+                                </p>
                             </div>
                             <div className="property-details__facts">
                                 <div>
@@ -165,13 +168,18 @@ function PropertyDetails() {
                     {isGalleryOpen && (
                         <div className="property-details__lightbox">
                             <span className="property-details__lightbox-counter">
-                                {selectedImageIndex + 1}/{property.imageUrls.length}
+                                {selectedImageIndex + 1}/
+                                {property.imageUrls.length}
                             </span>
                             <button
                                 className="property-details__lightbox-toggle"
-                                onClick={() => setShowThumbnails((current) => !current)}
+                                onClick={() =>
+                                    setShowThumbnails((current) => !current)
+                                }
                             >
-                                {showThumbnails ? "Hide all images" : "Show all images"}
+                                {showThumbnails
+                                    ? "Hide all images"
+                                    : "Show all images"}
                             </button>
                             {showThumbnails && (
                                 <div className="property-details__lightbox-thumbnails">
@@ -185,7 +193,9 @@ function PropertyDetails() {
                                                     ? "property-details__lightbox-thumbnail property-details__lightbox-thumbnail--active"
                                                     : "property-details__lightbox-thumbnail"
                                             }
-                                            onClick={() => setSelectedImageIndex(index)}
+                                            onClick={() =>
+                                                setSelectedImageIndex(index)
+                                            }
                                         />
                                     ))}
                                 </div>

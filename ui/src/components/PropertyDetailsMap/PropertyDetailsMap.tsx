@@ -7,10 +7,7 @@ type PropertyDetailsMapProps = {
     longitude: number;
 };
 
-function PropertyDetailsMap({
-    latitude,
-    longitude,
-}: PropertyDetailsMapProps) {
+function PropertyDetailsMap({ latitude, longitude }: PropertyDetailsMapProps) {
     return (
         <MapContainer
             center={[latitude, longitude]}
