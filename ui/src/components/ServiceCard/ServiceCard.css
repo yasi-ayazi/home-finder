@@ -1,4 +1,6 @@
 .service-card {
+    min-width: 0;
+    box-sizing: border-box;
     padding: 24px 32px;
     background: var(--bg);
     border: 1px solid #ececec;
@@ -13,6 +15,13 @@
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
+}
+
+@media (max-width: 600px) {
+    .service-card {
+        min-height: 180px;
+        padding: 22px 24px;
+    }
 }
 
 .service-card:hover {

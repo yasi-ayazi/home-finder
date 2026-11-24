@@ -1,4 +1,5 @@
 .property-card {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     background: var(--bg);
@@ -48,6 +49,7 @@
 }
 
 .property-card__address {
+    overflow-wrap: anywhere;
     margin-bottom: 4px;
     font-size: 1rem;
     line-height: 1.35;
@@ -56,6 +58,7 @@
 }
 
 .property-card__details {
+    overflow-wrap: anywhere;
     font-size: 0.9rem;
     line-height: 1.45;
     color: var(--text);
@@ -63,6 +66,13 @@
 
 .property-card__link {
     display: block;
+    min-width: 0;
     color: inherit;
     text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .property-card__image {
+        height: clamp(200px, 64vw, 260px);
+    }
 }
