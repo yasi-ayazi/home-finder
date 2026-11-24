@@ -1,6 +1,7 @@
 .property-sort-wrapper {
     position: relative;
     width: 190px;
+    min-width: 0;
 }
 
 .property-sort {
@@ -26,4 +27,20 @@
     font-weight: 400;
 
     pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .property-sort-wrapper {
+        width: 100%;
+    }
+
+    .property-sort {
+        padding-left: 16px;
+        padding-right: 32px;
+        text-overflow: ellipsis;
+    }
+
+    .property-sort__arrow {
+        right: 14px;
+    }
 }

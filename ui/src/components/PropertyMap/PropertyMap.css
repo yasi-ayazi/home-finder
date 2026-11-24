@@ -63,7 +63,7 @@
 }
 
 .property-popup {
-    width: 403px;
+    width: min(403px, calc(100vw - 72px));
     display: flex;
     align-items: stretch;
 }
@@ -109,4 +109,34 @@
 .buy-page__map .leaflet-popup-content-wrapper {
     padding: 0;
     overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+    .buy-page__map .leaflet-container {
+        height: 480px;
+    }
+}
+
+@media (max-width: 600px) {
+    .buy-page__map .leaflet-container {
+        height: 360px;
+    }
+
+    .property-popup {
+        align-items: stretch;
+    }
+
+    .property-popup__image {
+        width: 96px;
+        height: 96px;
+    }
+
+    .property-popup__content {
+        min-width: 0;
+        padding-inline: 10px;
+    }
+
+    .property-popup__details {
+        white-space: normal;
+    }
 }
