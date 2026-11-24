@@ -28,3 +28,20 @@
 .search-tabs__button:hover {
     background: #eff6ff;
 }
+
+.search-tabs__button--active:hover {
+    background: var(--primary);
+}
+
+@media (max-width: 600px) {
+    .search-tabs {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .search-tabs__button {
+        flex: 1 1 0;
+        min-height: 44px;
+        padding: 7px 20px;
+    }
+}

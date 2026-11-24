@@ -2,10 +2,14 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    width: 100%;
+    min-width: 0;
 }
 
 .search-box input {
     width: 420px;
+    min-width: 0;
+    box-sizing: border-box;
     padding: 18px 24px;
 
     border: none;
@@ -16,6 +20,7 @@
 }
 
 .search-box button {
+    flex: 0 0 auto;
     padding: 19px 24px;
 
     border: none;
@@ -28,4 +33,19 @@
     font-weight: 600;
 
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .search-box {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-box input,
+    .search-box button {
+        width: 100%;
+        min-height: 52px;
+        padding: 14px 20px;
+    }
 }
