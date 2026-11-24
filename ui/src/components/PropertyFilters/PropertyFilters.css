@@ -1,5 +1,6 @@
 .property-filters-wrapper {
     position: relative;
+    min-width: 0;
 }
 
 .property-filters__panel {
@@ -37,6 +38,24 @@
     justify-content: space-between;
 
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .property-filters {
+        width: 100%;
+        min-width: 0;
+        padding-inline: 16px;
+    }
+
+    .property-filters__panel {
+        width: min(320px, calc(100vw - 32px));
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    .property-filters__price-inputs {
+        flex-direction: column;
+    }
 }
 
 .property-filters__count {
