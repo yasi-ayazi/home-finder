@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "./PropertyMap.css";
@@ -10,9 +11,36 @@ import type { Property } from "../../types/property";
 function MapResizeHandler() {
     const map = useMap();
 
-    setTimeout(() => {
-        map.invalidateSize();
-    }, 0);
+    useEffect(() => {
+        const container = map.getContainer();
+        let animationFrame = window.requestAnimationFrame(() => {
+            map.invalidateSize();
+        });
+
+        const handleResize = () => {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = window.requestAnimationFrame(() => {
+                map.invalidateSize({ pan: false });
+            });
+        };
+
+        if (typeof ResizeObserver === "undefined") {
+            window.addEventListener("resize", handleResize);
+
+            return () => {
+                window.removeEventListener("resize", handleResize);
+                window.cancelAnimationFrame(animationFrame);
+            };
+        }
+
+        const resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(container);
+
+        return () => {
+            resizeObserver.disconnect();
+            window.cancelAnimationFrame(animationFrame);
+        };
+    }, [map]);
 
     return null;
 }
