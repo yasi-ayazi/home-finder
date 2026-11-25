@@ -87,7 +87,7 @@ function PropertyDetails() {
     }
 
     return (
-        <main>
+        <main className="property-details">
             {loading && <p>Loading...</p>}
 
             {error && <p>{error}</p>}
