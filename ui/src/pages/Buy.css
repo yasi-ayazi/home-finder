@@ -163,7 +163,7 @@
         gap: 12px;
     }
 
-    .buy-page__controls > * {
+    .buy-page__controls>* {
         flex: 1 1 0;
         min-width: 0;
     }
@@ -186,4 +186,19 @@
     .buy-page__map {
         min-height: 360px;
     }
+}
+
+.buy-page__empty {
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.buy-page__empty h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.buy-page__empty p {
+    font-size: 16px;
+    color: #6b7280;
 }
