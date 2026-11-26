@@ -19,6 +19,11 @@ function SearchBox({
                 type="text"
                 value={query}
                 onChange={(event) => onQueryChange(event.target.value)}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        onSearch();
+                    }
+                }}
                 placeholder={
                     activeTab === "buy"
                         ? "Search properties..."

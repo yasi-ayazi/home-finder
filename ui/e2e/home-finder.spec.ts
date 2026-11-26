@@ -18,9 +18,9 @@ test("renders PostgreSQL properties and backend-managed media", async ({
         "src",
         "/media/properties/property-1.jpg",
     );
-    expect(
-        await image.evaluate(
-            (element: HTMLImageElement) => element.naturalWidth,
-        ),
-    ).toBeGreaterThan(0);
+    await expect
+        .poll(() =>
+            image.evaluate((element: HTMLImageElement) => element.naturalWidth),
+        )
+        .toBeGreaterThan(0);
 });
