@@ -15,7 +15,7 @@ function SearchPanel() {
             navigate(
                 trimmedQuery
                     ? `/buy?search=${encodeURIComponent(trimmedQuery)}`
-                    : "/buy"
+                    : "/buy",
             );
         }
     };
