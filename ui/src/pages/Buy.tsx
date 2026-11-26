@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import Fuse from "fuse.js";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 import "./Buy.css";
 import SearchBox from "../components/SearchBox/SearchBox";
 import PropertyList from "../components/PropertyList/PropertyList";
@@ -13,7 +15,8 @@ function getNumericPrice(price: string) {
 }
 
 function Buy() {
-    const [query, setQuery] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [query, setQuery] = useState(searchParams.get("search") ?? "");
     const [sortBy, setSortBy] = useState("newest");
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -39,11 +42,31 @@ function Buy() {
         loadProperties();
     }, []);
 
-    function handleSearch() {}
+    useEffect(() => {
+        setQuery(searchParams.get("search") ?? "");
+        setVisibleCount(4);
+    }, [searchParams]);
+
+    function handleSearch() {
+        const trimmedQuery = query.trim();
+
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (trimmedQuery) {
+                params.set("search", trimmedQuery);
+            } else {
+                params.delete("search");
+            }
+
+            return params;
+        });
+
+        setVisibleCount(4);
+    }
 
     function handleQueryChange(value: string) {
         setQuery(value);
-        setVisibleCount(4);
     }
 
     function handleTypesChange(types: string[]) {
@@ -72,15 +95,24 @@ function Buy() {
         setVisibleCount(4);
     }
 
-    // Filter properties by search, property type, and price
-    const q = query.trim().toLowerCase(); // q is a part of the query for example city like "cope"
+    // Get the submitted search query from the URL
+    const q = (searchParams.get("search") ?? "").trim().toLowerCase();
 
-    const filteredProperties = properties.filter((property) => {
-        const matchesSearch =
-            property.city.toLowerCase().includes(q) ||
-            property.address.toLowerCase().includes(q) ||
-            property.type.toLowerCase().includes(q);
+    const fuse = useMemo(() => {
+        return new Fuse(properties, {
+            keys: ["city", "address", "type"],
+            threshold: 0.3,
+            ignoreLocation: true,
+            ignoreDiacritics: true,
+        });
+    }, [properties]);
 
+    const searchedProperties = q
+        ? fuse.search(q).map((result) => result.item)
+        : properties;
+
+    // Filter searched properties by property type and price
+    const filteredProperties = searchedProperties.filter((property) => {
         const matchesType =
             selectedTypes.length === 0 || selectedTypes.includes(property.type);
 
@@ -90,7 +122,7 @@ function Buy() {
             (minPrice === "" || propertyPrice >= Number(minPrice)) &&
             (maxPrice === "" || propertyPrice <= Number(maxPrice));
 
-        return matchesSearch && matchesType && matchesPrice;
+        return matchesType && matchesPrice;
     });
     // Sorting
     const sortedProperties = [...filteredProperties];
@@ -163,7 +195,14 @@ function Buy() {
                         </p>
                     ) : (
                         <>
-                            <PropertyList properties={visibleProperties} />
+                            {visibleProperties.length === 0 ? (
+                                <div className="buy-page__empty">
+                                    <h2>No properties found</h2>
+                                    <p>Try a different search or adjust your filters.</p>
+                                </div>
+                            ) : (
+                                <PropertyList properties={visibleProperties} />
+                            )}
                             <PropertyMap properties={filteredProperties} />
                         </>
                     )}
