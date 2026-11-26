@@ -1,20 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./SearchPanel.css";
 import SearchTabs from "../SearchTabs/SearchTabs";
 import SearchBox from "../SearchBox/SearchBox";
 
 function SearchPanel() {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("buy");
     const [query, setQuery] = useState("");
     const handleSearch = () => {
         const trimmedQuery = query.trim();
 
-        if (trimmedQuery === "") {
-            return;
+        if (activeTab === "buy") {
+            navigate(
+                trimmedQuery
+                    ? `/buy?search=${encodeURIComponent(trimmedQuery)}`
+                    : "/buy"
+            );
         }
-
-        console.log("Active Tab:", activeTab);
-        console.log("Query:", trimmedQuery);
     };
 
     return (
