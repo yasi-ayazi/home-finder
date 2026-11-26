@@ -16,7 +16,9 @@ function getNumericPrice(price: string) {
 
 function Buy() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [query, setQuery] = useState(searchParams.get("search") ?? "");
+    const submittedQuery = searchParams.get("search") ?? "";
+    const [query, setQuery] = useState(submittedQuery);
+    const [previousQuery, setPreviousQuery] = useState(submittedQuery);
     const [sortBy, setSortBy] = useState("newest");
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -42,10 +44,12 @@ function Buy() {
         loadProperties();
     }, []);
 
-    useEffect(() => {
-        setQuery(searchParams.get("search") ?? "");
+    // Synchronize the search input when the URL query changes
+    if (previousQuery !== submittedQuery) {
+        setPreviousQuery(submittedQuery);
+        setQuery(submittedQuery);
         setVisibleCount(4);
-    }, [searchParams]);
+    }
 
     function handleSearch() {
         const trimmedQuery = query.trim();
@@ -96,7 +100,7 @@ function Buy() {
     }
 
     // Get the submitted search query from the URL
-    const q = (searchParams.get("search") ?? "").trim().toLowerCase();
+    const q = submittedQuery.trim().toLowerCase();
 
     const fuse = useMemo(() => {
         return new Fuse(properties, {
@@ -198,7 +202,10 @@ function Buy() {
                             {visibleProperties.length === 0 ? (
                                 <div className="buy-page__empty">
                                     <h2>No properties found</h2>
-                                    <p>Try a different search or adjust your filters.</p>
+                                    <p>
+                                        Try a different search or adjust your
+                                        filters.
+                                    </p>
                                 </div>
                             ) : (
                                 <PropertyList properties={visibleProperties} />
